@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from 'axios';
 
 
 export const Register = (props) => {
@@ -11,6 +12,32 @@ export const Register = (props) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(email);
+        const isFormValid = email && name && pass
+        if (isFormValid) {
+            axios({
+                method: 'post',
+                url: 'http://localhost:8081/api/auth/signup',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                data: {
+                    password: pass,
+                    login: name,
+                    email
+                }
+            }).then((resp) => {
+                const isOk = resp.status === 200
+                if (isOk) {
+                    alert('Проверьте почту')
+                } else {
+                    alert('Что-то пошло не так')
+                }
+            }).catch(() => {
+                alert('Что-то пошло не так')
+            })
+        } else {
+            alert('Заполните все поля')
+        }
     }
 
     const handleRegisterClick = () => {
