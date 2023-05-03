@@ -3,14 +3,14 @@ import { useNavigate } from "react-router-dom";
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
-export const ConfirmSignUp = (props) => {
+export const ConfirmSignUp = () => {
     const { token } = useParams(); // Получаем токен из URL
     const [message, setMessage] = useState('Подождите, идет подтверждение регистрации...');
     const [success, setSuccess] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
-        axios.get(`http://localhost:8080/signupConfirm/${token}`)
+        axios.get(`http://localhost:8081/api/auth/signupConfirm/${token}`)
             .then((response) => {
                 if (response.status === 200) {
                     setMessage('Регистрация подтверждена успешно!');

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 
 
-export const Register = (props) => {
+export const Register = () => {
     const [email, setEmail] = useState('');
     const [pass, setPass] = useState('');
     const [name, setName] = useState('');
@@ -29,6 +29,7 @@ export const Register = (props) => {
                 const isOk = resp.status === 200
                 if (isOk) {
                     alert('Проверьте почту')
+                    navigate('/login')
                 } else {
                     alert('Что-то пошло не так')
                 }
@@ -46,17 +47,17 @@ export const Register = (props) => {
 
     return (
         <div className="auth-form-container">
-            <h2>Register</h2>
+            <h2>Регистрация</h2>
         <form className="register-form" onSubmit={handleSubmit}>
-            <label htmlFor="name">Full name</label>
-            <input value={name} name="name" onChange={(e) => setName(e.target.value)} id="name" placeholder="full Name" />
-            <label htmlFor="email">email</label>
+            <label htmlFor="name">Введите логин</label>
+            <input value={name} name="name" onChange={(e) => setName(e.target.value)} id="name" placeholder="Ваш логин" />
+            <label htmlFor="email">Введите email</label>
             <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" placeholder="youremail@gmail.com" id="email" name="email" />
-            <label htmlFor="password">password</label>
+            <label htmlFor="password">Придумайте пароль</label>
             <input value={pass} onChange={(e) => setPass(e.target.value)} type="password" placeholder="********" id="password" name="password" />
-            <button type="submit">Log In</button>
+            <button type="submit">Продолжить</button>
         </form>
-        <button className="link-btn" onClick={handleRegisterClick}>Already have an account? Login here.</button>
+        <button className="link-btn" onClick={handleRegisterClick}>Уже есть аккаунт? Авторизуйтесь здесь.</button>
     </div>
     )
 }
